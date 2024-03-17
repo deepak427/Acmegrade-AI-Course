@@ -1,4 +1,4 @@
-# data types
+#data types
 
 x=5
 print(x, type(x))
@@ -30,4 +30,33 @@ print(tup_a+tup_b+nested_tup)
 print(tup_a.count(4))
 
 #List
+
+a_list=[2,3,7,None]
+print(a_list, type(a_list))
+
+print(list(range(20)))
+
+a_list.append('append')
+a_list.insert(1,'first')
+print(a_list)
+
+a_list.pop(1)
+a_list.remove(None)
+print(a_list)
+
+x=[4,None,"foo"]
+x.extend([7,8,(2,3)])
+print(x)
+
+a=[1,2,3,4,1,2,5,6,8,2,4,5]
+a.sort()
+a.sort(reverse=True)
+print(a)
+
+b=['saw','do','Hello','sound']
+b.sort(key=len)
+print(b)
+
+b[0:2]=["foo","dipu"]
+print(b)
 
