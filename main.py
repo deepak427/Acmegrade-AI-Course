@@ -60,3 +60,26 @@ print(b)
 b[0:2]=["foo","dipu"]
 print(b)
 
+# Conditional statements
+
+x=10
+
+if x>=10:
+    print('Yes')
+else:
+    print('No')
+
+# loops
+
+list_c=[10,20,30,40,50]
+
+for i in list_c:
+    print(i)
+
+x=5
+
+while x>=1:
+    print(x)
+    x=x-1
+
+
