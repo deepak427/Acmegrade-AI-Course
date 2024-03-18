@@ -114,4 +114,8 @@ print(a|b,a&b)
 
 # Comprehension
 
+strings=['a','as','bat','car','dove','python']
 
+c=[x.upper() for x in strings if len(x)>2]
+
+print(c)
