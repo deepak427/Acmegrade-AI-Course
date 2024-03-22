@@ -1,3 +1,3 @@
-## Python baiscs
+# Python baiscs
 
-# I revised all the basics of python.
+## Revision of basics of python.
