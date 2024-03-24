@@ -14,8 +14,10 @@ sdata={'Ohio':35000,"Texas":"71000"}
 obj3=pd.Series(sdata)
 print(obj3.to_dict())
 
-data={"states":["Ohio","Ohio","Ohio","Neveda",],
+data={"states":["Ohio","Ohio","Ohio","Neveda"],
       "year":[2000,2001,2002,2004],
       "pop":[1.5,1.7,3.6,2.4]}
-frame=pd.DataFrame(data)
-print(frame)
+frame=pd.DataFrame(data, columns=["pop","states","year"])
+print(frame.head())
+print(frame.loc[[1],["pop"]])
+print(frame[frame["year"]>2000])
