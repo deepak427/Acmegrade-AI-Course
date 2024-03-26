@@ -15,9 +15,17 @@ print(arr*arr)
 print(arr-arr)
 print(arr2>arr1)
 
-# # Pandas
+arr=np.arange(15).reshape((5,3))
+print(arr)
 
-# import pandas as pd
+print(arr.T)
+print(np.dot(arr,arr.T))
+
+print(arr.T@arr)
+
+# Pandas
+
+import pandas as pd
 
 # obj=pd.Series([4,7,-5,3])
 # print(obj)
