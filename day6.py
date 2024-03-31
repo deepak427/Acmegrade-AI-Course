@@ -56,5 +56,19 @@ print(pd.merge(df3,df4, left_on="lkey", right_on="rkey", how="outer"))
 
 print(pd.merge(df1,df2, how="left"))
 
-# 
+# Concatination
 
+arr=np.arange(12).reshape((3,4))
+print(np.concatenate([arr,arr], axis=1))
+print(np.concatenate([arr,arr]))
+
+s1=pd.Series([0,1], index=["a","b"], dtype="Int64")
+s2=pd.Series([2,3,4], index=["c","d","e"], dtype="Int64")
+s3=pd.Series([5,6], index=["f","g"], dtype="Int64")
+s4=pd.Series([5,6], index=["f","g"], dtype="Int64")
+
+print(pd.concat([s1,s2,s3,s4]))
+print(pd.concat([s1,s2,s3,s4], axis="columns"))
+
+#np.where
+#a.combine_first
