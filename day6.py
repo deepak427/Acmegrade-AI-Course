@@ -31,5 +31,30 @@ frame=pd.DataFrame(np.arange(12).reshape((4,3)),
                    columns=[["Ohio","Ohio","Coronada"],["Green","Red","Green"]])
 print(frame)
 
-frame.index.name=["key1","key2"]
-frame.columns.name=[]
+frame.index.names=["key1","key2"]
+frame.columns.names=["state","color"]
+print(frame)
+print(frame.index.nlevels)
+
+# Combining df
+
+df1=pd.DataFrame({"key":["b","b","a","c","a","a"],
+                  "data1":[1,2,3,4,5,6]})
+df2=pd.DataFrame({"key":["b","r","c"],
+                  "data2":[12,34,34]})
+
+df3=pd.DataFrame({"lkey":["b","b","a","c","a","a"],
+                  "data1":[1,2,3,4,5,6]})
+df4=pd.DataFrame({"rkey":["b","r","c"],
+                  "data2":[12,34,34]})
+
+print(pd.merge(df1,df2))
+print(pd.merge(df3,df4, left_on="lkey", right_on="rkey"))
+
+print(pd.merge(df1,df2, how="outer"))
+print(pd.merge(df3,df4, left_on="lkey", right_on="rkey", how="outer"))
+
+print(pd.merge(df1,df2, how="left"))
+
+# 
+
