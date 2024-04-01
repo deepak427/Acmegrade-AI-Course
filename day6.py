@@ -72,3 +72,6 @@ print(pd.concat([s1,s2,s3,s4], axis="columns"))
 
 #np.where
 #a.combine_first
+
+# Ploting and visualization
+
