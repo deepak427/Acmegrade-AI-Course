@@ -1,18 +1,33 @@
 import pandas as pd
 from matplotlib import pyplot as plt
-
-tips=pd.read_csv('data/sample.csv')
-print(tips.head())
-
 import seaborn as sns
 
-tips['Year_new']=tips['Year']+5
-print(tips.head())
+# loading dataset
+data = sns.load_dataset("mpg")
+print(data.head())
 
-tips['Year_new'].plot.hist(bins=50)
+data['force']=data['weight']*data['acceleration']
+print(data.head())
+
+data['force'].plot.hist(bins=50)
 plt.show()
-tips['Year_new'].plot.density()
+data['force'].plot.density()
 plt.show()
 
-#sns.regplot
-#sns.pairplot
+#Regplot and Pairplot
+
+sns.regplot(x = "mpg",
+            y = "acceleration",
+            data = data,
+            dropna = True)
+plt.show()
+
+sns.pairplot(data, hue ='weight')
+plt.show()
+
+#sns.catplot # specify rows and columns
+#Box plot
+
+#Data aggeragation and group operations
+#df.groupby
+#grouped.mean
