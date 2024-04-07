@@ -52,9 +52,34 @@ titanic_data.embark_town.value_counts().sort_values(ascending=False).plot.bar()
 plt.xlabel("Emabark Town")
 plt.ylabel("Number of Passengers")
 
+plt.show()
+
 titanic_data.embark_town.mode()
 
 titanic_data.embark_town.fillna("Southampton",inplace=True)
 
+# Categorical Data Encoding
+
+## One hot encoding
+
+titanic_data= sns.load_dataset("titanic")
+
+titanic_data= titanic_data[["sex","class","embark_town"]]
+print(titanic_data.head())
+temp= pd.get_dummies(titanic_data['sex'])
+print(temp.head())
+
+print(pd.concat([titanic_data['sex'], temp]))
+
+## Label Encoding
+
+from sklearn.preprocessing import LabelEncoder
+
+le=LabelEncoder()
+
+le.fit(titanic_data["class"])
+
+titanic_data['le_class']=le.transform(titanic_data['class'])
+print(titanic_data.head())
 
 
