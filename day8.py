@@ -10,16 +10,16 @@ import numpy as np
 
 from sklearn.preprocessing import StandardScaler
 
-data = sns.load_dataset("mpg")
+data = sns.load_dataset("iris")
 
 scalar=StandardScaler()
-# scalar.fit(data)
+print(data.head())
+data_to_scale=data[["sepal_length","sepal_width"]]
+data_scaled=scalar.fit_transform(data_to_scale)
 
-# data_scaled=scalar.transform(data)
+print(data_scaled)
 
-# print(data.head())
-
-# sns.kdeplot(data=["age"])
+sns.kdeplot(data=["sepal_length"])
 
 # Min max scalar
 
@@ -82,4 +82,26 @@ le.fit(titanic_data["class"])
 titanic_data['le_class']=le.transform(titanic_data['class'])
 print(titanic_data.head())
 
+# Discretization
+
+import warnings
+warnings.filterwarnings("ignore")
+
+diamond_data= sns.load_dataset("diamonds")
+print(diamond_data.head())
+
+sns.distplot(diamond_data['price'])
+plt.show()
+
+price_range=diamond_data['price'].max()-diamond_data["price"].min()
+
+lower_interval= int(np.floor(diamond_data["price"].min()))
+
+upper_interval= int(np.ceil(diamond_data["price"].max()))
+
+interval_length= int(price_range/10)
+
+print(lower_interval, upper_interval, interval_length)
+
+# Handling outliers
 
