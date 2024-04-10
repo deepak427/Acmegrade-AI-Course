@@ -14,22 +14,24 @@ data = sns.load_dataset("iris")
 
 scalar=StandardScaler()
 print(data.head())
+
 data_to_scale=data[["sepal_length","sepal_width"]]
 data_scaled=scalar.fit_transform(data_to_scale)
+scaled_df = pd.DataFrame(data_scaled, columns=data.columns[:2])
 
-print(data_scaled)
+print(scaled_df)
 
-sns.kdeplot(data=["sepal_length"])
+sns.kdeplot(data["sepal_length"])
+plt.show()
 
 # Min max scalar
 
 from sklearn.preprocessing import MinMaxScaler
 
 scalar=MinMaxScaler()
-# scalar.fit(data)
 
-# data_scaled=scalar.transform(data)
-# print(data.head())
+data_scaled=scalar.fit_transform(data_to_scale)
+print(data_scaled[:5])
 
 # Handling Missing Values
 # data.isnull.mean
