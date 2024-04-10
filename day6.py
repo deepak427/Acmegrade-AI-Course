@@ -70,8 +70,44 @@ s4=pd.Series([5,6], index=["f","g"], dtype="Int64")
 print(pd.concat([s1,s2,s3,s4]))
 print(pd.concat([s1,s2,s3,s4], axis="columns"))
 
-#np.where
-#a.combine_first
+
+a=pd.Series([np.nan,2.5,3.5,4.5,6.,np.nan],
+            index=["a","h","i","g","k","l"])
+b=pd.Series([4.,2.5,np.nan,4.5,np.nan,7.1],
+            index=["l","k","a","i","h","g"])
+
+print(a)
+print(b)
+
+print(np.where(pd.isna(a), b, a))
+print(a.combine_first(b))
 
 # Ploting and visualization
 
+from matplotlib import pyplot as plt
+
+data=np.arange(10)
+# plt.plot(data)
+
+fig=plt.figure()
+ax1=fig.add_subplot(2,2,1)
+ax1.hist(np.random.standard_normal(100), bins=20,color="black",alpha=0.6)
+
+ax2=fig.add_subplot(2,2,2)
+ax2.scatter(np.arange(30), np.arange(30)+3*np.random.standard_normal(30))
+
+ax3=fig.add_subplot(2,2,3)
+ax3.plot(np.random.standard_normal(50).cumsum(), color="black",linestyle="dashed")
+
+ax1=fig.add_subplot(2,2,4)
+
+fig=plt.figure()
+fig,ax=plt.subplots()
+
+ax.plot(np.random.randn(1000).cumsum(),color="black",label="one")
+ax.plot(np.random.randn(1000).cumsum(),linestyle="dotted",color="blue",label="two")
+ax.plot(np.random.randn(1000).cumsum(),linestyle="dotted",color="red",label="three")
+
+ax.legend()
+
+plt.show()
