@@ -21,3 +21,32 @@ categorical= X.filter(["sex", "smoker", "day", "time"])
 
 print(categorical["day"].value_counts())
 
+cat_numerical = pd.get_dummies(categorical)
+print(cat_numerical.head())
+
+X= pd.concat([numerical, cat_numerical], axis=1)
+print(X.head())
+
+# Divide dataset into train and test (optional: Validate)
+
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(X, y ,test_size=0.20, random_state=0)
+
+# data scaling/ Normalization
+
+from sklearn.preprocessing import StandardScaler
+
+sc=StandardScaler()
+X_train= sc.fit_transform(X_train)
+X_test=sc.transform(X_test)
+
+# Linear Regression
+
+from sklearn.linear_model import LinearRegression
+
+lin_reg= LinearRegression()
+regressor= lin_reg.fit(X_train, y_train)
+y_pred= regressor.predict(X_test)
+
+# Merices
