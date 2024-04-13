@@ -50,3 +50,25 @@ regressor= lin_reg.fit(X_train, y_train)
 y_pred= regressor.predict(X_test)
 
 # Merices
+
+# Mean absolute error | Mean squared error | Root mean squared error
+
+from sklearn import metrics
+
+print("Mean absolute error: " , metrics.mean_absolute_error(y_test, y_pred))
+print("Mean squared error: " , metrics.mean_squared_error(y_test, y_pred))
+print("Root mean squared error: ", np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
+
+# Random Forest
+
+from sklearn.ensemble import RandomForestRegressor
+
+rf_reg= RandomForestRegressor(random_state=42, n_estimators=500)
+regressor= rf_reg.fit(X_train, y_train)
+y_pred= regressor.predict(X_test)
+
+from sklearn import metrics
+
+print("Mean absolute error: " , metrics.mean_absolute_error(y_test, y_pred))
+print("Mean squared error: " , metrics.mean_squared_error(y_test, y_pred))
+print("Root mean squared error: ", np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
