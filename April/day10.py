@@ -40,6 +40,31 @@ sc=StandardScaler()
 X_train= sc.fit_transform(X_train)
 X_test=sc.transform(X_test)
 
+# Model 
+
+from sklearn.linear_model import LogisticRegression
+log_clf= LogisticRegression()
+clasifier= log_clf.fit(X_train, y_train)
+y_pred= clasifier.predict(X_test)
+
+# Performance
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+
+print(confusion_matrix(y_test, y_pred))
+print(classification_report(y_test, y_pred))
+print(accuracy_score(y_test, y_pred))
+
+# Random forest classifier
+
+from sklearn.ensemble import RandomForestClassifier
+
+rf_clf= RandomForestClassifier(random_state=42, n_estimators=500)
+clasifier= rf_clf.fit(X_train, y_train)
+y_pred= clasifier.predict(X_test)
+
+print(confusion_matrix(y_test, y_pred))
+print(classification_report(y_test, y_pred))
+print(accuracy_score(y_test, y_pred))
 
 
 
