@@ -97,4 +97,32 @@ km_model.fit(dataset)
 print(km_model.cluster_centers_)
 print(km_model.labels_)
 
+plt.scatter(dataset.values[:,0], dataset.values[:,1], c=km_model.labels_, cmap='rainbow')
+plt.scatter(km_model.cluster_centers_[:,0], km_model.cluster_centers_[:,1], s=100, c="black")
+plt.show()
+
+# Elbow method
+
+loss=[]
+
+for i in range(1, 11):
+    km=KMeans(n_clusters=i).fit(dataset)
+    loss.append(km.inertia_)
+
+plt.plot(range(1,11), loss)
+plt.title("Finding optimal number of clusters via elbow method")
+plt.xlabel("Number of clusters")
+plt.ylabel("loss")
+plt.show()
+
+km_model= KMeans(n_clusters=5)
+km_model.fit(dataset)
+
+print(km_model.cluster_centers_)
+print(km_model.labels_)
+
+plt.scatter(dataset.values[:,0], dataset.values[:,1], c=km_model.labels_, cmap='rainbow')
+plt.scatter(km_model.cluster_centers_[:,0], km_model.cluster_centers_[:,1], s=100, c="black")
+plt.show()
+
 
