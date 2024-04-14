@@ -13,7 +13,7 @@ print(exercise_df.head())
 
 # Dividing data into 
 X= exercise_df.drop(["kind"], axis=1)
-y= exercise_df.filter("kind")
+y= exercise_df.filter(["kind"])
 
 # Converting catrgorical data to numerical
 
@@ -66,6 +66,35 @@ print(confusion_matrix(y_test, y_pred))
 print(classification_report(y_test, y_pred))
 print(accuracy_score(y_test, y_pred))
 
+# Clustering
 
+from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
+
+dataset= pd.read_csv("April/data/Mall_Customers.csv")
+print(dataset.head())
+
+# Plotting
+
+# sns.displot(dataset["Annual Income (k$)"], kde= False, bins=50, color="blue")
+# plt.show()
+
+# sns.displot(dataset["Spending Score (1-100)"], kde= False, bins=50, color="red")
+# plt.show()
+
+# sns.regplot(x= "Annual Income (k$)", y= "Spending Score (1-100)", data=dataset)
+# plt.show()
+
+# sns.regplot(x= "Age", y= "Spending Score (1-100)", data=dataset)
+# plt.show()
+
+dataset= dataset.filter(["Spending Score (1-100)", "Annual Income (k$)"], axis=1)
+print(dataset.head())
+
+km_model= KMeans(n_clusters=4)
+km_model.fit(dataset)
+
+print(km_model.cluster_centers_)
+print(km_model.labels_)
 
 
