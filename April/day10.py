@@ -125,4 +125,3 @@ plt.scatter(dataset.values[:,0], dataset.values[:,1], c=km_model.labels_, cmap='
 plt.scatter(km_model.cluster_centers_[:,0], km_model.cluster_centers_[:,1], s=100, c="black")
 plt.show()
 
-
