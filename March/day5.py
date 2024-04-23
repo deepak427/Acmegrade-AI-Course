@@ -9,14 +9,14 @@ print(obj.value_counts())
 
 #loading data
 
-print(pd.read_csv("data/sample.csv",header=None))
+print(pd.read_csv("April/data/sample.csv",header=None))
 names=[0,1,2,3,4,5,6,7,8,9]
-print(pd.read_csv('data/sample.csv',names=names,index_col=3))
+print(pd.read_csv('April/data/sample.csv',names=names,index_col=3))
 
 # pd.read_csv("sample.txt",sep="\s+")
 
-result = pd.read_csv("data/sample.csv",skiprows=[0,2,3])
-result.to_csv("data/out.csv")
+result = pd.read_csv("April/data/sample.csv",skiprows=[0,2,3])
+result.to_csv("April/data/out.csv")
 
 # Data preprocessing
 
