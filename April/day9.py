@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 # Regression problems in ML
 
-# print(sns.get_dataset_names())
+print(sns.get_dataset_names())
 
 # Import dataset
 
@@ -72,3 +72,11 @@ from sklearn import metrics
 print("Mean absolute error: " , metrics.mean_absolute_error(y_test, y_pred))
 print("Mean squared error: " , metrics.mean_squared_error(y_test, y_pred))
 print("Root mean squared error: ", np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
+
+# Clasification problem in ML
+
+exercise_df = sns.load_dataset("exercise")
+print(exercise_df.head())
+
+exercise_df = exercise_df.drop(["id", "Unnamed: 0"], axis=1)
+print(exercise_df.head())
