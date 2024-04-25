@@ -22,44 +22,54 @@ warnings.filterwarnings("ignore")
 iris_data = sns.load_dataset("iris")
 print(iris_data.head())
 
-# from sklearn.preprocessing import LabelEncoder
-# label_encoder = LabelEncoder()
-# iris_data['Species'] = label_encoder.fit_transform(iris_data["Species"])
-# print(iris_data.head())
+from sklearn.preprocessing import LabelEncoder
+label_encoder = LabelEncoder()
+iris_data['species'] = label_encoder.fit_transform(iris_data["species"])
+print(iris_data.head())
 
-# np_iris = iris_data.to_numpy()
+np_iris = iris_data.to_numpy()
 
-# scalar = StandardScaler().fit(X_data)
+X_data=np_iris[:,0:4]
+Y_data=np_iris[:,4]
 
-# X_data = scalar.transform(X_data)
+print("\n Features before scaling: \n------------->")
+print(X_data[:5,:])
 
-# Y_data = keras.utils.to_categorical(Y_data, 3)
+print("\n targets before one hot encoding: \n------------->")
+print(Y_data[:5])
 
-# print("\n Features after scaling: \n------------->")
-# print(X_data[:5,:])
+scalar = StandardScaler().fit(X_data)
 
-# print("\N T")
-# print(Y_data[:5])
+X_data = scalar.transform(X_data)
 
-# # Spiliting data
+Y_data = tf.keras.utils.to_categorical(Y_data, 3)
+print(Y_data)
 
-# X_train, X_test, Y_train, Y_test = train_test_split(X_data, Y_data, test_size=0.10)
+print("\n Features after scaling: \n------------->")
+print(X_data[:5,:])
 
-# print("\n Train test Dimensions: \n------>")
-# print(X_train.shape, X_test.shape, Y_train.shape, Y_test.shape)
+print("\n targets after one hot encoding: \n------------->")
+print(Y_data[:5])
 
-# # Creating deep learning model
+# Spiliting data
 
-# from tensorflow import keras
+X_train, X_test, Y_train, Y_test = train_test_split(X_data, Y_data, test_size=0.10)
 
-# NB_classes = 3
+print("\n Train test Dimensions: \n------>")
+print(X_train.shape, X_test.shape, Y_train.shape, Y_test.shape)
 
-# model = tf.keras.models.Sequential()
+# Creating deep learning model
 
-# model.add(keras)
+from tensorflow import keras
 
-# # Saving a model
-# model.save("iris_save")
+NB_classes = 3
+
+model = tf.keras.models.Sequential()
+
+model.add(keras)
+
+# Saving a model
+model.save("iris_save")
 
 # # Load the model
 # loaded_model = keras.models.load_model("iris_save")
