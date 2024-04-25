@@ -66,10 +66,50 @@ NB_classes = 3
 
 model = tf.keras.models.Sequential()
 
-model.add(keras)
+# Input layer
+model.add(keras.layers.Dense(128,
+                             input_shape=(4,),
+                             name="Input-Layer",
+                             activation="relu"))
+
+# second hidden layer
+model.add(keras.layers.Dense(128,
+                             name="Hidden-Layer-2",
+                             activation="relu"))
+
+# output layer
+model.add(keras.layers.Dense(NB_classes,
+                             name="Output-Layer",
+                             activation="softmax"))
+
+model.compile(loss="categorical_crossentropy",
+              metrics=["accuracy"])
+
+print(model.summary())
+
+VERBOSE=1
+
+BATCH_SIZE=16
+
+EPOCHS=20
+
+VALIDATION_SPLIT=0.2
+
+print("\n Training Progress: \n-----------")
+
+history=model.fit(X_train,
+                  Y_train,
+                  batch_size=BATCH_SIZE,
+                  epochs=EPOCHS,
+                  verbose=VERBOSE,
+                  validation_split=VALIDATION_SPLIT)
+
+print("\n Accuracy during Training: \n----------")
+
+pd.DataFrame(history.history)['accuracy'].plot(figsize=(8,5))
 
 # Saving a model
-model.save("iris_save")
+# model.save("April/models/iris_save")
 
 # # Load the model
 # loaded_model = keras.models.load_model("iris_save")
