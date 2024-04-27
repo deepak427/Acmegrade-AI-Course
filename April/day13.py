@@ -22,7 +22,33 @@ print("Out of {} rows, {} are spam, {} are ham".format(len(dataset), len(dataset
 print("Number of null in label: {}".format((dataset["label"].isnull().sum())))
 print("Number of null in text: {}".format((dataset["text"].isnull().sum())))
 
-def 
+import string
 
+# Removing punctuations and tokenizing data
+
+def remove_punc(text):
+    text_nopunc = "".join([char for char in text if char not in string.punctuation])
+    return text_nopunc
+
+dataset["body_text_clean"] = dataset["text"].apply(lambda x: remove_punc(x))
+
+import re
+
+def tokenize(text):
+    tokens=re.split('\W', text)
+    return tokens
+
+dataset["body_text_tokenized"]= dataset["body_text_clean"].apply(lambda x: tokenize(x.lower()))
+
+print(dataset.head())
+
+stopwords = nltk.corpus.stopwords.words('english')
+
+def remove_stopwords(tokenizaed_list):
+    text=[word for word in tokenizaed_list if word not in stopwords]
+    return text
+
+dataset["body_text_nostop"]= dataset["body_text_tokenized"].apply(lambda x:remove_stopwords(x))
+print(dataset.head())
 
 
