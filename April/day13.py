@@ -4,9 +4,11 @@
 
 import pandas as pd
 import nltk
+nltk.download('stopwords')
 import numpy as np
 
-dataset=pd.read_csv("April/data/spam.csv",sep='\t', header=None)
+dataset=pd.read_csv("April/data/spam.csv", header=None, encoding="latin-1")
+dataset.drop(dataset.columns[[2, 3, 4]], axis=1, inplace=True)
 dataset.columns=['label', 'body_text']
 print(dataset.head())
 
@@ -20,7 +22,7 @@ print("Out of {} rows, {} are spam, {} are ham".format(len(dataset), len(dataset
 # Preprocessing
 
 print("Number of null in label: {}".format((dataset["label"].isnull().sum())))
-print("Number of null in text: {}".format((dataset["text"].isnull().sum())))
+print("Number of null in text: {}".format((dataset["body_text"].isnull().sum())))
 
 import string
 
@@ -30,7 +32,8 @@ def remove_punc(text):
     text_nopunc = "".join([char for char in text if char not in string.punctuation])
     return text_nopunc
 
-dataset["body_text_clean"] = dataset["text"].apply(lambda x: remove_punc(x))
+dataset["body_text_clean"] = dataset["body_text"].apply(lambda x: remove_punc(x))
+print(dataset.head())
 
 import re
 
@@ -49,6 +52,17 @@ def remove_stopwords(tokenizaed_list):
     return text
 
 dataset["body_text_nostop"]= dataset["body_text_tokenized"].apply(lambda x:remove_stopwords(x))
+print(dataset.head())
+
+# Stemming
+
+ps=nltk.PorterStemmer()
+
+def stemming(tokenized_text):
+    text=[ps.stem(word) for word in tokenized_text]
+    return text
+
+dataset["body_text_stemmed"]=dataset["body_text_nostop"].apply(lambda x:stemming(x))
 print(dataset.head())
 
 
