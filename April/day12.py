@@ -49,20 +49,22 @@ model.compile(loss="categorical_crossentropy",
 
 print(model.summary())
 
-history = model.fit(X_train, y_train, epochs=20, validation_data=(X_test, y_test))
+# history = model.fit(X_train, y_train, epochs=20, validation_data=(X_test, y_test))
 
-plt.plot(history.history["accuracy"])
-plt.show()
+# plt.plot(history.history["accuracy"])
+# plt.show()
 
-score=model.evaluate(X_test, y_test)
-print(score)
+# score=model.evaluate(X_test, y_test)
+# print(score)
 
-from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
 
 (X_train, y_train), (X_test, y_test) = mnist.load_data()
 
+print(X_train.shape)
+
 X_train=X_train.reshape(60000,28,28,1)
-X_test=X_test.reshape(60000,28,28,1)
+X_test=X_test.reshape(10000,28,28,1)
 
 X_train=X_train.astype('float32')
 X_test=X_test.astype('float32')
@@ -75,5 +77,23 @@ y_test = to_categorical(y_test, 10)
 
 # CNN model developement
 
+cnn=Sequential()
+cnn.add(Conv2D(32, kernel_size=(3,3), input_shape=(28,28,1), padding='same', activation='relu'))
+cnn.add(MaxPooling2D())
+cnn.add(Conv2D(32, kernel_size=(3,3), padding='same', activation='relu'))
+cnn.add(MaxPooling2D())
+cnn.add(Flatten())
+cnn.add(Dense (64, activation= 'relu'))
+cnn.add(Dense (10, activation='softmax'))
 
+cnn.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+print(cnn.summary())
+
+history_cnn=cnn.fit(X_train, y_train, epochs=20, validation_data=(X_test, y_test))
+
+plt.plot(history_cnn.history["accuracy"])
+plt.show()
+
+plt.plot(history_cnn.history["val_accuracy"])
+plt.show()
 
