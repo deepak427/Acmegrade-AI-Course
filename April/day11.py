@@ -107,6 +107,11 @@ history=model.fit(X_train,
 print("\n Accuracy during Training: \n----------")
 
 pd.DataFrame(history.history)['accuracy'].plot(figsize=(8,5))
+plt.title("Accuracy improvement after each epoch")
+plt.show()
+
+print("\nEvaluate against test dataset: \n--------------")
+print(model.evaluate(X_test, Y_test))
 
 # Saving a model
 # model.save("April/models/iris_save")
@@ -118,17 +123,20 @@ pd.DataFrame(history.history)['accuracy'].plot(figsize=(8,5))
 
 # print(loaded_model.summary())
 
-# # Predictions with deep learning model
+# Predictions with deep learning model
 
-# prediction_input = [[2.6,12.,2.4,4.4]]
+prediction_input = [[2.6,12.,2.4,4.4]]
 
-# # Scale the prediction datat with the same scaling object
-# scaled_input = scalar.transform(prediction_input)
+# Scale the prediction datat with the same scaling object
+scaled_input = scalar.transform(prediction_input)
 
-# # Get the raw prediction probabilities
-# raw_prediction = loaded_model.predict(scaled_input)
-# print("Raw prediction output (Probabilities): ", raw_prediction)
+# Get the raw prediction probabilities
+raw_prediction = model.predict(scaled_input)
+print("Raw prediction output (Probabilities): ", raw_prediction)
 
-# # Find predictions
-# prediction = np.argmax(raw_prediction)
-# print("Prediction is ", label_encoder.inverse_transform([prediction]))
+# Find predictions
+prediction = np.argmax(raw_prediction)
+print(prediction)
+print("Prediction is ", label_encoder.inverse_transform([prediction]))
+
+
