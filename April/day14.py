@@ -73,3 +73,17 @@ pulp_fiction_corelations_50=pulp_fiction_corelations[pulp_fiction_corelations['r
 print(pulp_fiction_corelations_50.sort_values("pf_corr", ascending=False).head())
 
 all_movie_corelations = user_movie_rating_matrix.corr(method="pearson", min_periods=50)
+
+# New user enters
+
+movie_data=[['Forrest Gump (1994)',4.0], ['Fight Club (1999)',3.5], ['Interstellar (2014)',4.0]]
+test_movies=pd.DataFrame (movie_data, columns=['Movie_Name', 'Movie_Rating'])
+print(test_movies.head())
+
+recommended_movies=pd.Series()
+
+for i in range(0,2):
+    movie=all_movie_corelations[test_movies['Movie_Name'][i]].dropna()
+    movie=movie.map(lambda movie_corr: movie_corr*test_movies["Movie_Rating"][i])
+    recommended_movies=recommended_movies.append(movie)
+print(recommended_movies)
