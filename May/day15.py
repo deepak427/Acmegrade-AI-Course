@@ -14,7 +14,7 @@ from tensorflow.keras.utils import to_categorical
 # Normalize the data
 
 X_train = X_train.astype('float32')
-X_test = X_train.astype('float32')
+X_test = X_test.astype('float32')
 X_train/=255.0
 X_test/=255.0
 
@@ -36,7 +36,7 @@ model.add(Dropout (0.25))
 
 model.add(Flatten())
 model.add(Dense (512, activation= 'relu'))
-model.add(Dropout (8.5))
+model.add(Dropout (0.5))
 model.add(Dense (10, activation='softmax'))
 
 # Compile the model
@@ -44,7 +44,7 @@ model.add(Dense (10, activation='softmax'))
 model.compile(
     loss="categorical_crossentropy",
     optimizer="adam",
-    metrics=["acuracy"]
+    metrics=["accuracy"]
 )
 
 print(model.summary())
@@ -55,7 +55,13 @@ model.fit(
     X_train,
     y_train,
     batch_size=32,
-    epoches=25,
+    epochs=5,
     validation_data=(X_test,y_test),
     shuffle=True
 )
+
+# Save the neural network architecture
+model_structure=model.to_json()
+f=Path("model_structure.json")
+f.write_text(model_structure)
+
