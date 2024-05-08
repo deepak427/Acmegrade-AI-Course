@@ -53,4 +53,32 @@ for intent in data["intents"]:
     if intent["tag"] not in classes:
         classes.append(intent["tag"])
 
-print(words)
+# Lemetization
+words=[lemmatizer.lemmatize(word.lower()) for word in words if word not in string.punctuation]
+
+words=sorted(set(words))
+classes=sorted(set(classes))
+
+# List for training data
+
+training=[]
+out_empty=[0]*len(classes)
+
+#creating a bag of words model
+for idx, doc in enumerate(doc_x):
+    bow=[]
+    text=lemmatizer.lemmatize(doc.lower())
+    for word in words:
+        bow.append(1) if word in text else bow.append(0) 
+    output_row=list(out_empty)
+    output_row[classes.index(doc_y[idx])]=1
+
+    training.append([bow, output_row])
+
+random.shuffle(training)
+
+training=np.array(training, dtype=object)
+
+train_X=np.array(list (training[:,0]))
+train_y=np.array(list (training[:,1]))
+
