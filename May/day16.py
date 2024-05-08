@@ -37,3 +37,20 @@ from tensorflow.keras.layers import Dense, Dropout
 
 nltk.download ("punkt") 
 nltk.download ("wordnet")
+
+lemmatizer=WordNetLemmatizer()
+words=[] 
+classes=[]
+doc_x=[] 
+doc_y=[]
+
+for intent in data["intents"]: 
+    for pattern in intent["patterns"]:
+        tokens=nltk.word_tokenize(pattern)
+        words.extend(tokens)
+        doc_x.append(pattern)
+        doc_y.append(intent["tag"]) 
+    if intent["tag"] not in classes:
+        classes.append(intent["tag"])
+
+print(words)
