@@ -33,7 +33,6 @@ data = {"intents": [
 
 # import dependencies
 
-
 nltk.download("punkt")
 nltk.download("wordnet")
 
