@@ -1,5 +1,1 @@
-# Python baiscs
-
-## Revision of basics of python.
-
-Completed the course
+# ACME grade AI course
